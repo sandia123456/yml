@@ -1,0 +1,95 @@
+openapi: 3.0.0
+info:
+  title: Colleague Portal - Users List
+  version: 1.0.0
+  description: API Documentation for Colleague Portal - Users List
+servers:
+  - url: https://msd-apishop.azurewebsites.net
+paths:
+  /api/AccountUser/GetAccountUsers:
+    post:
+      summary: Fetch User List by Corporate ID
+      description: Fetches a list of users based on the provided Corporate ID.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                corporateId:
+                  type: string
+                  description: Corporate ID for fetching user list.
+                paging:
+                  type: object
+                  properties:
+                    pageRowCount:
+                      type: integer
+                      description: Number of rows per page.
+                    pageNumber:
+                      type: integer
+                      description: Page number for pagination.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      description: User ID.
+                    name:
+                      type: string
+                      description: User name.
+        '400':
+          description: Bad request.
+        '500':
+          description: Internal server error.
+  /api/Corporate/GetCorporates:
+    post:
+      summary: Fetch User List Based on Customer Name
+      description: Fetches a list of users based on the provided Customer Name.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                entityStatus:
+                  type: string
+                  nullable: true
+                  description: Entity status (optional).
+                customerName:
+                  type: string
+                  description: Customer name for fetching user list.
+                accountId:
+                  type: string
+                  nullable: true
+                  description: Account ID (optional).
+                paging:
+                  type: object
+                  properties:
+                    pageRowCount:
+                      type: integer
+                      description: Number of rows per page.
+                    pageNumber:
+                      type: integer
+                      description: Page number for pagination.
+      responses:
+        '200':
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '400':
+          description: Bad request.
+        '500':
+          description: Internal server error.
